@@ -1,0 +1,55 @@
+---
+version: '3'
+
+services:
+
+  web:
+    image: nginx:1.20-alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "8082:80"
+    volumes:
+      - wpvol:/var/www/html/
+      - ./conf/website.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - wordsite
+
+  mysql_db:  
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    volumes:
+      - dbvol:/var/lib/mysql/
+    networks:
+      - wordsite
+    environment:
+      - MYSQL_ROOT_PASSWORD=root@123
+      - MYSQL_DATABASE=wp
+      - MYSQL_USER=wp
+      - MYSQL_PASSWORD=wp
+
+
+  wordfpm:
+    image: wordpress:php7.4-fpm-alpine
+    container_name: wordpress
+    restart: always
+    volumes:
+      - wpvol:/var/www/html
+    depends_on:
+      - mysql_db
+    environment:
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_NAME=wp
+      - WORDPRESS_DB_USER=wp
+      - WORDPRESS_DB_PASSWORD=wp
+    expose:
+      - 9000
+    networks:
+      - wordsite
+
+volumes:
+  dbvol:
+  wpvol:
+networks:
+  wordsite: 
