@@ -7,3 +7,10 @@ CONTAINER ID   IMAGE                         COMMAND                  CREATED   
 f1f73bd1f886   nginx:1.20-alpine             "/docker-entrypoint.…"   8 seconds ago   Up 6 seconds   0.0.0.0:8082->80/tcp, :::8082->80/tcp   nginx
 1421e85f08f3   mysql:latest                  "docker-entrypoint.s…"   8 seconds ago   Up 6 seconds   3306/tcp, 33060/tcp                     mysql
 ```
+
+```sh
+/root/wordsite/
+├── conf
+│   └── website.conf
+└── docker-compose.yml
+```
