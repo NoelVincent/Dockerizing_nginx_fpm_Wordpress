@@ -1,4 +1,4 @@
-# Docker compose - Creating NGINX-FPM-Wordpress site.
+# Docker compose - Creating NGINX-FPM-Wordpress site
 Here, we will be creating containers that need to create/run a wordpress site.
 
 # Docker
